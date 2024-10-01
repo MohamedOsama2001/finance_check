@@ -120,8 +120,22 @@ function sotoEgypt(stop) {
   ];
   const branches = ["Dubai", "wonder saudia"];
   const dateFilteredData = result.filter((item) => {
-    const travelDate = new Date(item["Travel Date"]).toISOString().split("T")[0];
-    return item["Status"] === "S" && item["Booking Type"] === "NDC Reservation" && !branches.includes(item["Branch"]) && (travelDate === todayDateString || travelDate === tomorrowDateString);
+    const travelDateValue = item["Travel Date"];
+  
+    // تحقق إذا كانت القيمة صالحة لتكون تاريخًا
+    if (!travelDateValue) return false; // إذا كانت القيمة غير موجودة
+    
+    const travelDate = new Date(travelDateValue);
+    
+    // تحقق من صحة التاريخ
+    if (isNaN(travelDate.getTime())) return false; // إذا كان التاريخ غير صحيح
+  
+    const travelDateString = travelDate.toISOString().split("T")[0];
+    
+    return item["Status"] === "S" 
+      && item["Booking Type"] === "NDC Reservation" 
+      && !branches.includes(item["Branch"]) 
+      && (travelDateString === todayDateString || travelDateString === tomorrowDateString);
   });
   const filteredData = result.filter((item) => {
     return (
@@ -165,8 +179,18 @@ function sotoDubai(stop) {
     "XSB",
   ];
   const dateFilteredData = result.filter((item) => {
-    const travelDate = new Date(item["Travel Date"]).toISOString().split("T")[0];
-    return item["Status"] === "S" && item["Booking Type"] === "NDC Reservation" && item["Branch"] === "Dubai" && (travelDate === todayDateString || travelDate === tomorrowDateString);
+    const travelDateValue = item["Travel Date"];
+  
+    // تحقق إذا كانت القيمة صالحة لتكون تاريخًا
+    if (!travelDateValue) return false; // إذا كانت القيمة غير موجودة
+    
+    const travelDate = new Date(travelDateValue);
+    
+    // تحقق من صحة التاريخ
+    if (isNaN(travelDate.getTime())) return false; // إذا كان التاريخ غير صحيح
+  
+    const travelDateString = travelDate.toISOString().split("T")[0];
+    return item["Status"] === "S" && item["Booking Type"] === "NDC Reservation" && item["Branch"] === "Dubai" && (travelDateString === todayDateString || travelDateString === tomorrowDateString);
   });
   const filteredData = result.filter((item) => {
     return (
@@ -231,8 +255,17 @@ function sotoKsa(stop) {
     "WAE",
   ];
   const dateFilteredData = result.filter((item) => {
-    const travelDate = new Date(item["Travel Date"]).toISOString().split("T")[0];
-    return item["Status"] === "S" && item["Booking Type"] === "NDC Reservation" && item["Branch"] === "wonder saudia" && (travelDate === todayDateString || travelDate === tomorrowDateString);
+    const travelDateValue = item["Travel Date"];
+  
+    // تحقق إذا كانت القيمة صالحة لتكون تاريخًا
+    if (!travelDateValue) return false; // إذا كانت القيمة غير موجودة
+    
+    const travelDate = new Date(travelDateValue);
+    // تحقق من صحة التاريخ
+    if (isNaN(travelDate.getTime())) return false; // إذا كان التاريخ غير صحيح
+  
+    const travelDateString = travelDate.toISOString().split("T")[0];
+    return item["Status"] === "S" && item["Booking Type"] === "NDC Reservation" && item["Branch"] === "wonder saudia" && (travelDateString === todayDateString || travelDateString === tomorrowDateString);
   });
   const filteredData = result.filter((item) => {
     return (
